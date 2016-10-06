@@ -15,6 +15,6 @@ Prostedky:
 
 1 html a php na akele
 
-2 DB na 83.240.108.164 MariaDB (fork MySql)
+2 DB MariaDB (fork MySql)
 
 Toť vše přátelé
