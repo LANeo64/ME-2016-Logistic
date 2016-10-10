@@ -6,6 +6,7 @@
 include "dbHandler.php";
 
 $dbHandler = getDatabase();
-$query = $dbHandler->prepare("SELECT * FROM goods");
-echo json_encode($query->fetchAll());
+$query = $dbHandler->prepare("SELECT * FROM Gifts");
+$query->execute();
+echo "{'data': ".json_encode($query->fetchAll())."}";
 ?>
