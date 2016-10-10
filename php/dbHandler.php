@@ -7,7 +7,7 @@
  */
 function loadDatabaseCredentials()
 {
-	$data = parse_ini("config.ini");
+	$data = parse_ini_file("config.ini");
 	if($data == False)
 	{
 		throw new Exception("Konfigurační soubor nebyl nalezen");
@@ -28,12 +28,13 @@ function getDatabase()
 	$user = $credentials["user"];
 	$password = $credentials["password"];
 	$charset = "utf8";
+	$db = "ME";
 	$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 	$opt = [
 		PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 	];
-	$handler = new PDO($dsn, $user, $pass, $opt);
+	$handler = new PDO($dsn, $user, $password, $opt);
 	$handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	return $handler;
 }
