@@ -35,7 +35,7 @@ function getDatabase()
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 	];
 	$handler = new PDO($dsn, $user, $password, $opt);
-	$handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	//$handler->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	return $handler;
 }
 ?>
