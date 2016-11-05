@@ -48,9 +48,10 @@ function create_table(data){
 function fill_select(url, payload, selector){
     $.post(url,payload,function(data, status){
         if(status === "success"){
-                var len = data.length;
+                var json = JSON.parse(data);
+                var len = json.data.length;
                 for(i = 0; i < len; i++) {
-                    $(selector).append("<option value=\"" + data[0].key + "\">" + data[i].val + "</option>");
+                    $(selector).append("<option value=\"" + json.data[0].key + "\">" + json.data[i].val + "</option>");
                 }
             } else {
                 $("#content").load("./html/op_failure.html");
