@@ -4,7 +4,6 @@
             <legend>Personal information</legend>        
             <select name="username">
                 <option value="" disabled selected>Vyberte své jméno</option>
-                <option value="xkrtek">krtek</option>
             </select>
             <button type="button" id="add_user">+</button>
             <input type="text" name="firstname" placeholder="Jméno" hidden="hidden">
@@ -35,6 +34,6 @@
     </div>
 </form>
 <script>
-    fill_select("./php/load.php","{\"payload\":\"users\"}","#user_info fieldset select");
-    fill_select("./php/load.php","{\"payload\":\"storage\"}","#item_info fieldset select[name='storage']");
+    fill_select("./php/load.php",{payload : "users"},"#user_info fieldset select");
+    fill_select("./php/load.php",{payload : "storage"},"#item_info fieldset select[name='storage']");
 </script>

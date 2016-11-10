@@ -5,23 +5,10 @@
 
 include "dbHandler.php";
 
-$from = 0;
-// Validace vstupních parametrů
-if(isset($_GET["from"]))
-{
-	$from = (int)$_GET["from"];
-}
-
-if($from < 0)
-{
-	$from = 0;
-}
-
 // Dotaz na databázi
 $dbHandler = getDatabase();
-$query = $dbHandler->prepare("SELECT * FROM Gifts LIMIT 10 OFFSET :fromLimit");												
-$query->bindParam(':fromLimit', $from, PDO::PARAM_INT);
+$query = $dbHandler->prepare("SELECT Users.name as \"user_name\", Gifts.name, `count`, `type`, `place`, `price`, `predicted_price` FROM Gifts LEFT JOIN Users ON Users.user_id = Gifts.user_id");
 $query->execute();
 
-echo "{'data': ".json_encode($query->fetchAll())."}";
+echo json_encode($query->fetchAll());
 ?>
