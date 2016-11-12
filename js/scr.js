@@ -16,20 +16,52 @@
  */
 function create_table(data){
     var html = "<table>"+
-            "<tr><th>Name</th><th>Quantity</th><th>Storage</th><th>Perishable</th>"+
-            "<th>Date</th><th>Buy price/pcs</th><th>Sell price/pcs</th>"+
-            "<th>Total sell price</th><th>User</th></tr><tr>";
+            "<tr><th>Name</th><th>Množství</th><th>Místo</th><th>Typ</th>"+
+            "<th>Datum přidání</th><th>Pořizovací cena</th><th>Prodejní cena</th>"+
+            "<th>Celková cena</th><th>Uživatel</th><th>Poznámka</th></tr><tr>";
     var len = data.length;
     for(i = 0; i < len; i++) {
-        html += "<tr><td>"+data[i].name+"</td><td>"+data[i].quantity+"</td>";
-        html += "<td>"+data[i].storage+"</td><td>"+data[i].perishable+"</td>";
-        html += "<td>"+data[i].date+"</td><td>"+data[i].buy_price+"</td>";
-        html += "<td>"+data[i].sell_price+"</td>";
-        html += "<td>"+data[i].sell_price*data[i].quantity+"</td>";
-        html += "<td>"+data[i].user+"</td></tr>";
+        html += "<tr><td>"+data[i].name+"</td><td>"+data[i].count+"</td>";
+        html += "<td>"+data[i].place+"</td><td>"+(data[i].type == 1 ? "Kazící se" : "Trvanlivé")+"</td>";
+        html += "<td>"+data[i].date+"</td><td>"+data[i].price+"</td>";
+        html += "<td>"+data[i].predicted_price+"</td>";
+        html += "<td>"+parseInt(data[i].predicted_price, 10) * parseInt(data[i].count, 10)+"</td>";
+        html += "<td>"+data[i].user_name+"</td>";
+		html += "<td>"+data[i].note+"</td></tr>";
     }    
     html += "</table>";
     return html;
+}
+
+/** @function transform_json_array_to_key_val
+ * Transforms array of json objects with format 
+ * { 
+ * 	"whatever" : value,
+ * 	"whatever2" : value2
+ * }
+ * 
+ * Into { 
+ * 			"key" : value,
+ * 			"val" : value
+ * 		}
+ */
+function transform_json_array_to_key_val(array)
+{
+	if(array.length === 0)
+	{
+		return array;
+	}
+	return array.map(function (el) {
+			var keys = Object.keys(el);
+			if(keys.length != 2)
+			{
+				throw new Error("Json object HAS to have 2 key value pairs!");
+			}
+			return {
+				"key" : el[keys[0]],
+				"val" : el[keys[1]]
+			};
+		});
 }
 
 /** @function fill_select
@@ -48,10 +80,10 @@ function create_table(data){
 function fill_select(url, payload, selector){
     $.post(url,payload,function(data, status){
         if(status === "success"){
-                var json = JSON.parse(data);
-                var len = json.data.length;
+                var json = transform_json_array_to_key_val(data);
+                var len = json.length;
                 for(i = 0; i < len; i++) {
-                    $(selector).append("<option value=\"" + json.data[0].key + "\">" + json.data[i].val + "</option>");
+                    $(selector).append("<option value=\"" + json[i].key + "\">" + json[i].val + "</option>");
                 }
             } else {
                 $("#content").load("./html/op_failure.html");
@@ -91,6 +123,7 @@ function fill_json(){
         json += "\"perishable\":\"" + $("#item_info").children().eq(i).children("select[name='perishable']").val() + "\",";
         json += "\"storage\":\"" + $("#item_info").children().eq(i).children("select[name='storage']").val() + "\",";
         json += "\"buy_price\":\"" + $("#item_info").children().eq(i).children("input[name='item_buy']").val() + "\",";
+		json += "\"note\" : \"" + $("#item_info").children().eq(i).children(".note").val() + "\",";
         json += "\"sell_price\":\"" + $("#item_info").children().eq(i).children("input[name='item_sell']").val() + "\"}";
         if ( (i+1) < len ){
             json += ",";
@@ -98,7 +131,7 @@ function fill_json(){
     }
     json += "]}";
     
-    return json;
+    return { data : json };
 }
 
 /** @function insert_table
@@ -106,7 +139,7 @@ function fill_json(){
  * @returns {undefined}
  */
 function insert_table(){
-    $.post("./php/load.php","{\"payload\":\"items\"}",function(data, status){
+    $.post("./php/query.php",{},function(data, status){
         if(status === "success") {
             $("#content").html(create_table(data));
         } else {
@@ -137,8 +170,8 @@ $(document).ready(function(){
     // submits the form and sends the json to store.php file on the server
     $("#content").on( "click", "#submit_form", function() {
         //alert(fill_json()); // print the json in an alert window
-        $.post("./php/store.php",fill_json(),function(data, status){
-            //alert("Data: " + data + "\nStatus: " + status);
+        $.post("php/store.php",fill_json(),function(data, status){
+            console.log("Data: " + data + "\nStatus: " + status);
             if(status === "success"){
                 $("#content").load("./html/op_success.html");
             } else {

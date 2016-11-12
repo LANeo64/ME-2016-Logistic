@@ -1,11 +1,11 @@
 <form>
     <div id="user_info">
         <fieldset>
-            <legend>Personal information</legend>        
+            <legend>Informace o uživateli</legend>        
             <select name="username">
                 <option value="" disabled selected>Vyberte své jméno</option>
             </select>
-            <button type="button" id="add_user">+</button>
+            <!--<button type="button" id="add_user">+</button>-->
             <input type="text" name="firstname" placeholder="Jméno" hidden="hidden">
             <input type="text" name="lastname" placeholder="Příjmení" hidden="hidden">
             <input type="email" name="email" placeholder="E-mail" hidden="hidden">                
@@ -26,11 +26,12 @@
             </select>
             <input type="number" name="item_buy" placeholder="Nákupní cena">
             <input type="number" name="item_sell" placeholder="Prodejní cena">
+            <textarea name = "note" class = "note">Zde zadejte jakoukoliv poznámku například to, co se má se zbožím udělat v případě, že se neprodá.</textarea>
         </fieldset> 
     </div>
     <div>
         <button type="button" id="add_item">+</button>
-        <button type="button" id="submit_form">Submit</button>        
+        <button type="button" id="submit_form">Odeslat</button>        
     </div>
 </form>
 <script>

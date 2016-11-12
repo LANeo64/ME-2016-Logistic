@@ -18,7 +18,8 @@ if($payload == "users")
 }
 elseif($payload == "storage")
 {
-	$query = $dbHandler->prepare("SELECT `user_id`, `name` FROM Users");
+	$query = $dbHandler->prepare("SELECT `place_id`, `place` FROM Place");
 	$query->execute();
+	echo json_encode($query->fetchAll());
 }
 ?>

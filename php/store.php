@@ -20,7 +20,7 @@ try{
 	$id = (int)$data['user'];
 	for($i = 0; $i < (int)$data['item_count']; $i++)
 	{
-		$query = $dbHandler->prepare("INSERT INTO Gifts(`user_id`, `name`, `count`, `type`, `place`, `price`, `predicted_price`) Values(:userID, :name, :count, :type, :place, :price, :predicted_price)");
+		$query = $dbHandler->prepare("INSERT INTO Gifts(`user_id`, `name`, `count`, `type`, `place_id`, `price`, `predicted_price`, `date`, `note`) Values(:userID, :name, :count, :type, :place, :price, :predicted_price, NOW(), :note)");
 		$query->bindParam(':userID', $id, PDO::PARAM_INT);
 		$name = $data["items"][$i]['name'];
 		$query->bindParam(':name', $name);
@@ -34,6 +34,8 @@ try{
 		$query->bindParam(':type', $type, PDO::PARAM_BOOL);
 		$place = $data["items"][$i]['storage'];
 		$query->bindParam(':place', $place);
+		$note = $data["items"][$i]['note'];
+		$query->bindParam(':note', $note);
 		$query->execute();
 	}
 	header('HTTP/1.1 200 OK');
