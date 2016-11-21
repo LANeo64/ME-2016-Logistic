@@ -1,40 +1,69 @@
 <form>
     <div id="user_info">
         <fieldset>
-            <legend>Informace o uživateli</legend>        
-            <select name="username">
-                <option value="" disabled selected>Vyberte své jméno</option>
-            </select>
-            <!--<button type="button" id="add_user">+</button>-->
-            <input type="text" name="firstname" placeholder="Jméno" hidden="hidden">
-            <input type="text" name="lastname" placeholder="Příjmení" hidden="hidden">
-            <input type="email" name="email" placeholder="E-mail" hidden="hidden">                
+            <legend>Informace o uživateli</legend>
+            <table>
+                <tr>
+                    <td class="form_label"><label for="username">Uživatel</label></td>
+                    <td class="form_value">
+                        <select name="username" id="username">
+                            <option value="" disabled selected>Vyberte své jméno</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
         </fieldset>
-    </div>    
+    </div>
     <div id="item_info">
         <fieldset>
-            <legend>Item information</legend>
-            <input type="text" name="item_name" placeholder="Název">
-            <input type="number" name="item_qty" placeholder="Počet">
-            <select name="perishable">
-                <option value="" disabled selected>Zvolte trvanlivost</option>
-                <option value="1">Kazivé</option>
-                <option value="0">Trvanlivé</option>
-            </select>
-            <select name="storage">
-                <option value="" disabled selected>Zvolte umístění</option>
-            </select>
-            <input type="number" name="item_buy" placeholder="Nákupní cena">
-            <input type="number" name="item_sell" placeholder="Prodejní cena">
-            <textarea name = "note" class = "note">Zde zadejte jakoukoliv poznámku například to, co se má se zbožím udělat v případě, že se neprodá.</textarea>
-        </fieldset> 
+            <legend>Informace o věci</legend>
+            <table>
+                <tr>
+                    <td class="form_label"><label for="item_name">Název</label></td>
+                    <td class="form_value"><input type="text" name="item_name" id="item_name" placeholder="Název"></td>
+                </tr>
+                <tr>
+                    <td class="form_label"><label for="item_qty">Počet</label></td>
+                    <td class="form_value"><input type="number" name="item_qty" id="item_qty" placeholder="Počet"></td>
+                </tr>
+                <tr>
+                    <td class="form_label"><label for="perishable">Trvanlivost</label></td>
+                    <td class="form_value">
+                        <select name="perishable" id="perishable">
+                            <option value="" disabled selected>Zvolte trvanlivost</option>
+                            <option value="1">Kazivé</option>
+                            <option value="0">Trvanlivé</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_label"><label for="storage">Umístění</label></td>
+                    <td class="form_value">
+                        <select name="storage" id="storage">
+                            <option value="" disabled selected>Zvolte umístění</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td class="form_label"><label for="item_buy">Nákupní cena</label></td>
+                    <td class="form_value"><input type="number" name="item_buy" id="item_buy" placeholder="Nákupní cena"></td>
+                </tr>
+                <tr>
+                    <td class="form_label"><label for="item_sell">Prodejní cena</label></td>
+                    <td class="form_value"><input type="number" name="item_sell" id="item_sell" placeholder="Prodejní cena"></td>
+                </tr>
+                <tr>
+                    <td class="form_label"><label for="note">Poznámka</label></td>
+                    <td class="form_value"><textarea name="note" id="note">např. co se zbožím, když se neprodá.</textarea></td>
+                </tr>
+            </table>
+        </fieldset>
     </div>
     <div>
         <button type="button" id="add_item">+</button>
-        <button type="button" id="submit_form">Odeslat</button>        
+        <button type="button" id="submit_form">Odeslat</button>
     </div>
 </form>
 <script>
-    fill_select("./php/load.php",{payload : "users"},"#user_info fieldset select");
-    fill_select("./php/load.php",{payload : "storage"},"#item_info fieldset select[name='storage']");
+    fill_select("./php/load.php", {payload: "users"}, "#user_info fieldset select");
+    fill_select("./php/load.php", {payload: "storage"}, "#item_info fieldset select[name='storage']");
 </script>

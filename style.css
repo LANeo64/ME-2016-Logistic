@@ -1,3 +1,135 @@
-a {
-    color:green;
+/* defaults */
+body {
+    font-size: 100%;
+    margin: 0px;
+}
+
+#wrapper {
+    margin: 10px;
+    max-width: 1200px;
+    min-width: 280px;
+}
+
+a.webname {
+    text-decoration: none;
+}
+
+a, a:visited, a:active {
+    color: navy;
+}
+
+a:hover {
+    color: blue;
+}
+
+/* menu */
+ul {
+    padding: 0px;
+    //padding-left: 0px;
+}
+
+#menu li {
+    list-style-type: none;
+    //border: 1px solid;
+    //border-color: orange;
+    background-color: navy;
+    margin-bottom: 5px;
+}
+
+#menu li:hover {
+    background-color: blue;
+}
+
+#menu li a {
+    color: white;
+    font-size: 1.2em;
+    padding: 10px;
+    padding-left: 20px;
+    display: block;
+    text-decoration: none;
+}
+
+#menu li a:hover {
+    color: lightblue;
+}
+
+/* content */
+#content input {
+    color: red;
+}
+#content label {
+    width: 100px;
+}
+
+.form_label {
+    width: 95px;
+}
+
+.form_value {
+    min-width: 150px;
+    //width: 220px;
+}
+
+#content input, #content select, #content textarea {
+    background-color: #ffc;
+    color: navy;
+    border: 1px solid red;
+    width: 100%;
+    min-width: 160px;
+    font-size: 1em;
+    padding: 3px;
+}
+
+/* common table styles */
+.regular_table, .mobile_table, .regular_table tr, .regular_table td {
+    background-color: #fff;
+    color: navy;
+    border: 1px navy solid;
+}
+
+.regular_table th, .mobile_table th {
+    background-color: navy;
+    color: white;
+}
+
+/* regular pc table style */
+.regular_table th{
+    border: 1px lightblue solid;
+    white-space: nowrap;
+    padding: 5px;
+}
+
+.regular_table td{
+    padding: 5px;
+    //min-width: 100px;
+}
+
+.regular_table td:nth-child(3), .regular_table td:nth-child(9) {
+    white-space: nowrap;
+}
+
+.regular_table tr:nth-child(even) td {
+    background-color: #ffc;
+}
+
+/* mobile phone table style */
+.mobile_table {
+    
+}
+
+.mobile_table td, .mobile_table th {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.mobile_table td{
+    padding-left: 20px
+}
+
+.mobile_table td.key {
+    background-color: #ff9;
+    color: navy;
+    font-weight: bold;
+    padding-left: 10px;
+    border-top: 1px navy dotted;
 }
