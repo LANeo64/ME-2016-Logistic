@@ -195,10 +195,24 @@ $(document).ready(function () {
 
     // adds another row of fields for another item to store in the database
     $("#content").on("click", "#add_item", function () {
+        if($("#item_info").children("fieldset").length == 1){
+            $("#item_info").children("fieldset").first().find(".remove_item").show();
+        }
         var data = $("#item_info").children("fieldset").first().html();
         $("#item_info").append("<fieldset>" + data + "</fieldset>");
+        
+        
         //$.get("./html/form_item.html",function (data) { $("#item_info").append(data);});
-        //alert($("#item_info").children().eq(i).children(".note").val());
+    });
+    
+    $("#content").on("click", ".remove_item", function () {
+        var item_count = $(this).parent().siblings().length + 1;
+        if(item_count == 1) {
+            $(this).closest("form").find("input[type=text], textarea").val("");
+            $(this).hide();
+        } else {
+            $(this).parent().remove();
+        }
     });
 
     // submits the form and sends the json to store.php file on the server

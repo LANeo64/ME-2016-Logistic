@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td class="form_label"><label for="item_qty">Počet</label></td>
-                    <td class="form_value"><input type="number" name="item_qty" id="item_qty" placeholder="Počet"></td>
+                    <td class="form_value"><input type="number" min="0" name="item_qty" id="item_qty" placeholder="Počet"></td>
                 </tr>
                 <tr>
                     <td class="form_label"><label for="perishable">Trvanlivost</label></td>
@@ -45,17 +45,18 @@
                 </tr>
                 <tr>
                     <td class="form_label"><label for="item_buy">Nákupní cena</label></td>
-                    <td class="form_value"><input type="number" name="item_buy" id="item_buy" placeholder="Nákupní cena"></td>
+                    <td class="form_value"><input type="number" min="0" name="item_buy" id="item_buy" placeholder="Nákupní cena"></td>
                 </tr>
                 <tr>
                     <td class="form_label"><label for="item_sell">Prodejní cena</label></td>
-                    <td class="form_value"><input type="number" name="item_sell" id="item_sell" placeholder="Prodejní cena"></td>
+                    <td class="form_value"><input type="number" min="0" name="item_sell" id="item_sell" placeholder="Prodejní cena"></td>
                 </tr>
                 <tr>
                     <td class="form_label"><label for="note">Poznámka</label></td>
                     <td class="form_value"><textarea name="note" id="note">např. co se zbožím, když se neprodá.</textarea></td>
                 </tr>
             </table>
+            <button type="button" class="remove_item" hidden="hidden">-</button>
         </fieldset>
     </div>
     <div>
